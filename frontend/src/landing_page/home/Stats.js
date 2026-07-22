@@ -21,11 +21,11 @@ function Stats() {
                 <div className='col-6 p-5'>
                     <img src='media/images/ecosystem.png' style={{width:"90%"}}/>
                     <div className='text-center p-5'>
-                        <a href='' className='mx-5 p-4' style={{textDecoration:'none'}}>
+                        <a href='' className='mx-5 p-4'>
                             Explore Our Products 
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
-                        <a href='' style={{textDecoration:'none'}}>
+                        <a href=''>
                             Try Kite demo
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
