@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import axios from "axios";
 
-// import { holdings } from "../data/data";
+import { API_BASE_URL } from "../config";
+
+import GeneralContext from "./GeneralContext";
 
 const Holdings = () => {
 
   const [allHoldings, setAllHoldings] = useState([]);
 
+  const { holdingsVersion } = useContext(GeneralContext);
+
   useEffect(() => {
-    axios.get("http://localhost:3002/allHoldings").then((res) => {
-      // console.log(res.data);
+    axios.get(`${API_BASE_URL}/allHoldings`).then((res) => {
       setAllHoldings(res.data);
-    })
-  }, []);
+    });
+  }, [holdingsVersion]);
 
   return (
     <>

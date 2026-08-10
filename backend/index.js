@@ -201,20 +201,49 @@ app.get('/allPositions', async (req, res) => {
 });
 
 app.post('/newOrder', async (req, res) => {
-    let newOrder = new OrdersModel({
-        name: req.body.name,
-        qty: req.body.qty,
-        price: req.body.price,
-        mode: req.body.mode,
-    });
+    const { name, qty, price, mode } = req.body;
 
-    newOrder.save();
+    // Parse to Number — React e.target.value returns strings
+    const qtyNum = Number(qty);
+    const priceNum = Number(price);
+
+    const newOrder = new OrdersModel({ name, qty: qtyNum, price: priceNum, mode });
+    await newOrder.save();
+
+    // Update holdings to reflect buy/sell in the holdings section
+    const existingHolding = await HoldingsModel.findOne({ name });
+
+    if (mode === "BUY") {
+        if (existingHolding) {
+            // Recalculate weighted average cost
+            const totalCost = existingHolding.avg * existingHolding.qty + priceNum * qtyNum;
+            const totalQty = existingHolding.qty + qtyNum;
+            existingHolding.qty = totalQty;
+            existingHolding.avg = totalCost / totalQty;
+            existingHolding.price = priceNum;
+            await existingHolding.save();
+        } else {
+            await HoldingsModel.create({ name, qty: qtyNum, avg: priceNum, price: priceNum, net: "0.00%", day: "0.00%" });
+        }
+    }
+
+    if (mode === "SELL") {
+        if (existingHolding) {
+            if (existingHolding.qty <= qtyNum) {
+                await existingHolding.deleteOne();
+            } else {
+                existingHolding.qty -= qtyNum;
+                existingHolding.price = priceNum;
+                await existingHolding.save();
+            }
+        }
+    }
 
     res.send("Order Saved!!");
 });
 
 app.listen(PORT, () => {
-    console.log("App started!");
+    console.log(`App started on port ${PORT}!`);
 
     mongoose.connect(uri);
     console.log("Database Connected!!!");
