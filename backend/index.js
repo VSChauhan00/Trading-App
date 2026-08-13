@@ -4,6 +4,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require("dotenv").config();
+const cookieParser = require("cookie-parser");
+const authRoute = require("./routes/AuthRoute");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
@@ -249,3 +252,9 @@ app.listen(PORT, () => {
     console.log("Database Connected!!!");
 });
 
+
+app.use(cookieParser());
+
+app.use(express.json());
+
+app.use("/", authRoute);
