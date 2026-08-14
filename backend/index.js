@@ -17,8 +17,13 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:3001"],
+  credentials: true,
+}));
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser());
 
 // app.get('/addHoldings', async (req, res) => {
 //     let tempHoldings = [
@@ -245,16 +250,12 @@ app.post('/newOrder', async (req, res) => {
     res.send("Order Saved!!");
 });
 
+app.use("/", authRoute);
+
 app.listen(PORT, () => {
     console.log(`App started on port ${PORT}!`);
 
-    mongoose.connect(uri);
-    console.log("Database Connected!!!");
+    mongoose.connect(uri)
+        .then(() => console.log("Database Connected!!!"))
+        .catch((err) => console.error("Database connection error:", err));
 });
-
-
-app.use(cookieParser());
-
-app.use(express.json());
-
-app.use("/", authRoute);

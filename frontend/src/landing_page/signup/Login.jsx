@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { signup } from "../../api";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { login } from "../../api";
 import "./Signup.css";
-import Login from "./Login";
 
-function Signup() {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    username: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
 
   // Dashboard is a separate app; redirect via window.location
   const DASHBOARD_URL = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
@@ -30,16 +26,16 @@ function Signup() {
     setError("");
 
     try {
-      const result = await signup({
-        ...formData,
-        createdAt: new Date().toISOString(),
+      const result = await login({
+        email: formData.email,
+        password: formData.password,
       });
 
       if (result.success) {
         // Redirect to dashboard (separate app on port 3001)
         window.location.href = DASHBOARD_URL;
       } else {
-        setError(result.message || "Signup failed");
+        setError(result.message || "Login failed");
       }
     } catch (err) {
       setError(err.message || "Something went wrong. Please try again.");
@@ -51,22 +47,9 @@ function Signup() {
   return (
     <div className="signup-container">
       <form onSubmit={handleSubmit} className="signup-form">
-        <h2>Create Account</h2>
+        <h2>Login</h2>
 
         {error && <div className="error-message">{error}</div>}
-
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            disabled={loading}
-          />
-        </div>
 
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -96,21 +79,15 @@ function Signup() {
         </div>
 
         <button type="submit" className="btn-primary" disabled={loading}>
-          {loading ? "Creating Account..." : "Sign Up"}
+          {loading ? "Logging in..." : "Login"}
         </button>
-        <div className="login-redirect">
-          <p>Already have an account?</p>
-          <button
-            className="btn-secondary"
-            onClick={() => navigate("/login")}
-          >
-            Log In
-          </button>
-        </div>
-      </form>
 
+        <p className="auth-switch">
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+      </form>
     </div>
   );
-}
+};
 
-export default Signup;
+export default Login;
