@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
+import AuthContext from "../AuthContext";
+
+/** Generate a two-letter avatar initials string from a username. */
+const getInitials = (name) => {
+  if (!name) return "U";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+};
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const { username } = useContext(AuthContext);
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
@@ -55,8 +66,9 @@ const Menu = () => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+          <div className="avatar">{getInitials(username)}</div>
+          <p className="username">{username || "USERID"}</p>
+          <LogoutButton />
         </div>
       </div>
     </div>

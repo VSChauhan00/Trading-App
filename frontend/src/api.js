@@ -32,6 +32,18 @@ async function apiRequest(endpoint, options = {}) {
 }
 
 // Auth API functions
+
+export async function logout() {
+  return apiRequest("/logout", {
+    method: "POST",
+  });
+}
+
+export async function verifyAuth() {
+  return apiRequest("/verify", {
+    method: "GET",
+  });
+}
 export async function signup(userData) {
   return apiRequest("/signup", {
     method: "POST",

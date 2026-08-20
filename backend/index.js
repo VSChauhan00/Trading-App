@@ -6,11 +6,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 const authRoute = require("./routes/AuthRoute");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
+const User = require("./model/UserModel");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
@@ -251,6 +253,45 @@ app.post('/newOrder', async (req, res) => {
 });
 
 app.use("/", authRoute);
+
+// --- Auth session routes ---
+
+// Verify: checks whether the client has a valid session token.
+// Used by the dashboard to gate access and redirect unauthenticated users.
+// Also returns the logged-in user's username so the dashboard can personalise the UI.
+app.get("/verify", async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ authenticated: false });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const user = await User.findById(decoded.id).select("username email");
+    if (!user) {
+      return res.status(401).json({ authenticated: false });
+    }
+    res.json({
+      authenticated: true,
+      id: decoded.id,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (err) {
+    res.status(401).json({ authenticated: false });
+  }
+});
+
+// Logout: clears the token cookie so the session ends across all apps.
+app.post("/logout", (req, res) => {
+  res.cookie("token", "", {
+    withCredentials: true,
+    httpOnly: false,
+    maxAge: 0,
+  });
+  res.json({ message: "Logged out successfully", success: true });
+});
 
 app.listen(PORT, () => {
     console.log(`App started on port ${PORT}!`);
