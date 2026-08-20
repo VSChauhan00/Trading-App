@@ -14,8 +14,8 @@ const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const User = require("./model/UserModel");
 
-const PORT = process.env.PORT || 3002;
-const uri = process.env.MONGO_URL;
+const PORT = process.env.BACKEND_PORT || 3002;
+const uri = process.env.BACKEND_MONGO_URL;
 
 const app = express();
 
@@ -267,7 +267,7 @@ app.get("/verify", async (req, res) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const decoded = jwt.verify(token, process.env.BACKEND_TOKEN_KEY);
     const user = await User.findById(decoded.id).select("username email");
     if (!user) {
       return res.status(401).json({ authenticated: false });

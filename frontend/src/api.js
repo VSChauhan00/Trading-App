@@ -1,8 +1,8 @@
 // Centralized API configuration
-// REACT_APP_API_URL allows overriding the full URL (e.g., for production)
-// REACT_APP_API_PORT falls back to the backend port (default 3002)
-const API_PORT = process.env.REACT_APP_API_PORT || 3002;
-const API_BASE_URL = process.env.REACT_APP_API_URL || `http://localhost:${API_PORT}`;
+// REACT_APP_BACKEND_URL allows overriding the full URL (e.g., for production)
+// REACT_APP_BACKEND_PORT falls back to the backend port (default 3002)
+const API_PORT = process.env.REACT_APP_BACKEND_PORT || 3002;
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || `http://localhost:${API_PORT}`;
 
 // Helper to perform API requests
 async function apiRequest(endpoint, options = {}) {
