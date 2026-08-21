@@ -290,12 +290,17 @@ app.get("/verify", async (req, res) => {
 });
 
 // Logout: clears the token cookie so the session ends across all apps.
+const isProduction = process.env.NODE_ENV === "production";
+const clearCookieOptions = {
+  withCredentials: true,
+  httpOnly: false,
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax",
+  maxAge: 0,
+};
+
 app.post("/logout", (req, res) => {
-  res.cookie("token", "", {
-    withCredentials: true,
-    httpOnly: false,
-    maxAge: 0,
-  });
+  res.cookie("token", "", clearCookieOptions);
   res.json({ message: "Logged out successfully", success: true });
 });
 
