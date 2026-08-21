@@ -19,8 +19,14 @@ const uri = process.env.BACKEND_MONGO_URL;
 
 const app = express();
 
+// CORS: configurable per-environment via BACKEND_CORS_ORIGINS (comma-separated)
+// Falls back to localhost origins for local development.
+const allowedOrigins = process.env.BACKEND_CORS_ORIGINS
+  ? process.env.BACKEND_CORS_ORIGINS.split(",").map((o) => o.trim())
+  : ["http://localhost:3000", "http://localhost:3001"];
+
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001"],
+  origin: allowedOrigins,
   credentials: true,
 }));
 app.use(bodyParser.json());
