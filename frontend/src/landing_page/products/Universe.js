@@ -11,7 +11,7 @@ function Universe() {
             <div className='row text-center text-muted mt-5' style={{ fontSize: '12px' }}>
                 <div className='col-4 text-center text-muted mt-3'>
                     <a href=''>
-                        <image src='media/images/zerodhaFundhouse.png' className='p-2' style={{ width: '210px', marginBottom: '12px' }} />
+                        <img src='media/images/zerodhaFundhouse.png' className='p-2' style={{ width: '210px', marginBottom: '12px' }} />
                         <p>Our asset management venture<br />
                             that is creating simple and transparent index<br />
                             funds to help you save for your goals.
@@ -20,7 +20,7 @@ function Universe() {
                 </div>
                 <div className='col-4 text-center text-muted mt-3'>
                     <a href=''>
-                        <image src='media/images/sensibullLogo.svg' className='p-2' style={{ width: '210px', marginBottom: '29px' }} />
+                        <img src='media/images/sensibullLogo.svg' className='p-2' style={{ width: '210px', marginBottom: '29px' }} />
                         <p>Options trading platform that lets you<br />
                             create strategies, analyze positions, and examine<br />
                             data points like open interest, FII/DII, and more.
@@ -29,7 +29,7 @@ function Universe() {
                 </div>
                 <div className='col-4 text-center text-muted'>
                     <a href=''>
-                        <image src='media/images/tijori.svg' style={{ width: '210px', marginBottom: '15px' }} />
+                        <img src='media/images/tijori.svg' style={{ width: '210px', marginBottom: '15px' }} />
                         <p>Investment research platform<br />
                             that offers detailed insights on stocks,<br />
                             sectors, supply chains, and more.
@@ -40,7 +40,7 @@ function Universe() {
             <div className='row text-center text-muted my-5' style={{ fontSize: '12px' }}>
                 <div className='col-4 text-center text-muted'>
                     <a href=''>
-                        <image src='media/images/streakLogo.png' className='p-2' style={{ width: '210px', marginBottom: '12px' }} />
+                        <img src='media/images/streakLogo.png' className='p-2' style={{ width: '210px', marginBottom: '12px' }} />
                         <p>Systematic trading platform<br />
                             that allows you to create and backtest<br />
                             strategies without coding.
@@ -58,7 +58,7 @@ function Universe() {
                 </div>
                 <div className='col-4 text-center text-muted'>
                     <a href=''>
-                        <image src='media/images/dittoLogo.png' style={{ width: '200px', marginBottom: '12px' }} />
+                        <img src='media/images/dittoLogo.png' style={{ width: '200px', marginBottom: '12px' }} />
                         <p>Personalized advice on life<br />
                             and health insurance. No spam<br />
                             and no mis-selling.

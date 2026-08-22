@@ -32,6 +32,13 @@ const Login = () => {
       });
 
       if (result.success) {
+        // Store token in localStorage for cross-origin reliability.
+        // The cookie is set by the backend as a fallback; the Bearer token
+        // in localStorage ensures auth persists across origins and browsers
+        // that may block third-party cookies.
+        if (result.token) {
+          localStorage.setItem("token", result.token);
+        }
         // Redirect to dashboard (separate app on port 3001)
         window.location.href = DASHBOARD_URL;
       } else {

@@ -25,7 +25,7 @@ module.exports.Signup = async (req, res, next) => {
     res.cookie("token", token, cookieOptions);
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
+      .json({ message: "User signed in successfully", success: true, token, user });
     next();
   } catch (error) {
     console.error(error);
@@ -48,7 +48,7 @@ module.exports.Login = async (req, res, next) => {
     }
      const token = createSecretToken(user._id);
      res.cookie("token", token, cookieOptions);
-     res.status(201).json({ message: "User logged in successfully", success: true });
+     res.status(201).json({ message: "User logged in successfully", success: true, token });
      next()
   } catch (error) {
     console.error(error);

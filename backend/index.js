@@ -266,7 +266,8 @@ app.use("/", authRoute);
 // Used by the dashboard to gate access and redirect unauthenticated users.
 // Also returns the logged-in user's username so the dashboard can personalise the UI.
 app.get("/verify", async (req, res) => {
-  const token = req.cookies.token;
+  // Accept token from cookie OR Authorization header (hybrid auth for cross-origin).
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (!token) {
     return res.status(401).json({ authenticated: false });

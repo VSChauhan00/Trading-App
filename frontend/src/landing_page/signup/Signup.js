@@ -36,6 +36,10 @@ function Signup() {
       });
 
       if (result.success) {
+        // Store token in localStorage for cross-origin reliability.
+        if (result.token) {
+          localStorage.setItem("token", result.token);
+        }
         // Redirect to dashboard (separate app on port 3001)
         window.location.href = DASHBOARD_URL;
       } else {

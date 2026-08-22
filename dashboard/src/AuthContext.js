@@ -18,8 +18,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        // Read token from localStorage (set by frontend after login).
+        // Sent via Authorization header so auth works even when browsers
+        // block third-party cookies on cross-origin requests.
+        const token = localStorage.getItem("token");
         const res = await fetch(`${API_BASE_URL}/verify`, {
           credentials: "include",
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
 
         if (res.ok) {
@@ -41,14 +46,18 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
+    const token = localStorage.getItem("token");
     try {
       await fetch(`${API_BASE_URL}/logout`, {
         credentials: "include",
         method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
     } catch (err) {
       console.error("Logout request failed:", err);
     } finally {
+      // Clear token from localStorage.
+      localStorage.removeItem("token");
       // Navigate to the frontend home route immediately.
       // NOTE: We intentionally do NOT call setIsAuthenticated(false) here.
       // Doing so would trigger a ProtectedRoute re-render that races with
