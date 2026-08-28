@@ -11,12 +11,12 @@ function CreateTickets() {
                     <a href=''>Offline Account Opening</a><br />
                     <a href=''>Company, Partnership and HUF Account Opening</a><br />
                     <a href=''>NRI Account Opening</a><br />
-                    <a href=''>Charges at Zerodha</a><br />
-                    <a href=''>Zerodha IDFC First Bank 3-in-1 Account</a><br />
+                    <a href=''>Charges at Tradinx</a><br />
+                    <a href=''>Tradinx IDFC First Bank 3-in-1 Account</a><br />
                     <a href=''>Getting Started</a><br />
                 </div>
                 <div className='col-4'>
-                    <h5 className='mb-4'><i class="fa fa-user" aria-hidden="true"></i>  Your Zerodha Account</h5>
+                    <h5 className='mb-4'><i class="fa fa-user" aria-hidden="true"></i>  Your Tradinx Account</h5>
                     <a href=''>Login Credentials</a><br />
                     <a href=''>Account Modification and Segment Addition</a><br />
                     <a href=''>DP ID and bank details</a><br />

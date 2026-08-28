@@ -11,7 +11,7 @@ function Hero() {
             <div className='row text-muted my-4 pt-4'>
                 <div className='col'>
                     <h4>Trading, built on clarity</h4>
-                    <p>Zerodha gives you direct access to global stock and forex markets, with the tools, pricing, and infrastructure to trade with confidence.</p>
+                    <p>Tradinx gives you direct access to global stock and forex markets, with the tools, pricing, and infrastructure to trade with confidence.</p>
 
                     <p>We built this platform because we were tired of choosing between powerful and usable. Most trading tools force that trade-off — either buried in complexity built for institutions, or stripped down to the point of being unreliable. We wanted neither. So we built a platform that gives serious traders real depth, without making them fight the interface to get it.</p>
                 </div>
@@ -36,7 +36,7 @@ function Hero() {
             <div className='row text-muted mb-4'>
                 <div className='col'>
                     <h4>Who we're building for</h4>
-                    <p>Whether you're managing a long-term portfolio or trading active positions day to day, Zerodha is built to scale with you — from your first trade to your five-hundredth.</p>
+                    <p>Whether you're managing a long-term portfolio or trading active positions day to day, Tradinx is built to scale with you — from your first trade to your five-hundredth.</p>
                 </div>
                 <div className='col'>
                     <h4>Get started</h4>

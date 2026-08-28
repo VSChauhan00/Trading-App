@@ -23,7 +23,7 @@ function ProductsPage() {
             <RightSection 
                 imageURL="media/images/console.png" 
                 productName="Console" 
-                productDescription="The central dashboard for your Zerodha account. Gain insights into your trades and investments with in-depth reports and visualisations."
+                productDescription="The central dashboard for your Tradinx account. Gain insights into your trades and investments with in-depth reports and visualisations."
                 learnMore="" 
             />
 
@@ -54,7 +54,7 @@ function ProductsPage() {
                 appStore=""
             />
 
-            <p className='fs-5 text-muted text-center my-5' >Want to know more about our technology stack? Check out the <a href='' style={{ color: 'blue'}}>Zerodha.tech blog.</a></p>
+            <p className='fs-5 text-muted text-center my-5' >Want to know more about our technology stack? Check out the <a href='' style={{ color: 'blue'}}>Tradinx.tech blog.</a></p>
 
             <Universe />
         </>

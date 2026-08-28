@@ -13,7 +13,7 @@ function Team() {
                     <p>Developer of this project</p>
                 </div>
                 <div className='col mt-5'>
-                    <p>Zerodha is a project built by Vivek, a self-taught engineer. It started as a way to understand how real trading platforms work under the hood, and has grown from there.</p>
+                    <p>Tradinx is a project built by Vivek, a self-taught engineer. It started as a way to understand how real trading platforms work under the hood, and has grown from there.</p>
 
                     <p>This is a solo build, developed as part of my portfolio— feedback and suggestions are always welcome at <i style={{color:'blue'}}>xyz@gmail.com</i>.</p>
 
